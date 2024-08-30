@@ -134,7 +134,7 @@ class TestProductRoutes(TestCase):
         # Uncomment this code once READ is implemented
         #
 
-        # # Check that the location header was correct
+        # Check that the location header was correct
         # response = self.client.get(location)
         # self.assertEqual(response.status_code, status.HTTP_200_OK)
         # new_product = response.get_json()
@@ -166,6 +166,17 @@ class TestProductRoutes(TestCase):
     #
     # ADD YOUR TEST CASES HERE
     #
+    def test_get_product(self):
+        '''It should Get a single product'''
+        # get the id of a product
+        test_product = self._create_products(1)[0]
+        response = self.client.get(f"{BASE_URL}/{test_product.id}")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.get_json()
+        self.assertEqual(data["name"], test.product.name)
+
+    
+
 
     ######################################################################
     # Utility functions
